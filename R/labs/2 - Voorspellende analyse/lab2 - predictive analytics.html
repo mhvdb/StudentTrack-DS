@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Info Support Data Science eXperience</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	
+	<script type="text/javascript" src="../etc/jquery-1.5.2.js"></script>
+		
+	<style type="text/css">
+	.container.collapsed{
+		/*background-color:red;
+		height: 88px;
+		margin-bottom: 10px;
+		margin-right: 10px;
+		width: 427px;*/
+	}
+	
+	.container.expanded{
+		/*background-color:green;
+		height: 300px;
+		margin-bottom: 10px;
+		margin-right: 10px;
+		width: 427px;*/
+	}
+	
+	.expanded_content {
+		display: none;
+	}
+	
+	.container.expanded .expanded_content {
+		display: block;
+	}
+	.container.expanded .collapsed_content {
+		display: none;
+	}
+	.expanded_content{
+		/* height:100px; */
+		color: darkgrey;
+		display: none;
+	}
+	
+	/*default state*/
+	.container.collapsed .nav {
+		/*height:20px;
+		width:20px;
+		background-color: black;
+		color:white;*/
+		/*background-image: url("../etc/toggle_expand_alt.png");
+		background-repeat: no-repeat;*/
+		background: url("../etc/toggle_expand_alt.png") no-repeat;
+		background-size: 30px 30px;
+	}
+	
+	.container.expanded .nav {
+		/*height:20px;
+		width:20px;
+		background-color: white;
+		color:black;   */
+		background: url("../etc/toggle_collapse_alt.png") no-repeat;
+		background-size: 30px 30px;
+	}
+	</style>
+	
+    <style type="text/css">
+      /*@import url(../etc/fonts.css);*/
+	  
+	  @font-face {
+	    font-family: 'Yanone Kaffeesatz';
+	    font-style: normal;
+	    font-weight: 400;
+		src: local('Yanone Kaffeesatz Regular'), local('YanoneKaffeesatz-Regular'), url(../etc/YDAoLskQQ5MOAgvHUQCcLaGiwYDZumYWHCJeOGLK6bU.woff2) format('woff2'), url(../etc/YDAoLskQQ5MOAgvHUQCcLcvyhSUCWNe0YoQkk3OBepg.woff) format('woff');
+  	  }
+
+      /*@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);*/
+	  
+	  @font-face {
+	    font-family: 'Droid Serif';
+	    font-style: normal;
+	    font-weight: 400;
+	    src: local('Droid Serif'), local('DroidSerif'), url(../etc/0AKsP294HTD-nvJgucYTaI4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2'), url(../etc/0AKsP294HTD-nvJgucYTaIbN6UDyHWBl620a-IRfuBk.woff) format('woff');
+	  }
+	  @font-face {
+	    font-family: 'Droid Serif';
+	    font-style: normal;
+	    font-weight: 700;
+	    src: local('Droid Serif Bold'), local('DroidSerif-Bold'), url(../etc/QQt14e8dY39u-eYBZmppwYlIZu-HDpmDIZMigmsroc4.woff2) format('woff2'), url(../etc/QQt14e8dY39u-eYBZmppwTqR_3kx9_hJXbbyU8S6IN0.woff) format('woff');
+	  }
+	  @font-face {
+	    font-family: 'Droid Serif';
+	    font-style: italic;
+	    font-weight: 400;
+	    src: local('Droid Serif Italic'), local('DroidSerif-Italic'), url(../etc/cj2hUnSRBhwmSPr9kS5898u2Q0OS-KeTAWjgkS85mDg.woff2) format('woff2'), url(../etc/cj2hUnSRBhwmSPr9kS5899kZXW4sYc4BjuAIFc1SXII.woff) format('woff');
+	  }
+	  
+      /*@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);*/
+	  
+	  /* cyrillic-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkbWJ8El2VFcUWHOh_Oq6BA8.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkSfE9Gpc2xZQgtwyMvPhThE.woff) format('woff');
+        unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkRLwxQbNcFnuWuPk3YnjToI.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkWOb2gHztoQeulij-1lvl-8.woff) format('woff');
+        unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* greek-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkXZwgMdXZ_smNJnor9b37uA.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkbUY-ErTxhuJNpt9lU8fcqw.woff) format('woff');
+        unicode-range: U+1F00-1FFF;
+      }
+      /* greek */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkVvp_UfalQ96C-39B62FvR4.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkX6qoo8ILXpvSLO10ucU3yI.woff) format('woff');
+        unicode-range: U+0370-03FF;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkag5eI2G47JWe0-AuFtD150.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkdIh4imgI8P11RFo6YPCPC0.woff) format('woff');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkY4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkYbN6UDyHWBl620a-IRfuBk.woff) format('woff');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* cyrillic-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytrLZkzWHE0Rai0z0KZwCYHE.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytjpEpsbGv0WCalYSBSSLSDI.woff) format('woff');
+        unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytqs1twL42OQU-XDphSlMXYM.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytlRROVH9Vvc8xHnAGvvgPQc.woff) format('woff');
+        unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* greek-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytuGaZ6kaGPxTsxBG85inVYY.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytkxkyJNiPQcjp3dyBORqq9o.woff) format('woff');
+        unicode-range: U+1F00-1FFF;
+      }
+      /* greek */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytpGgvICTqEy5bPQVoK8tr-Y.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytuSd7Sk-1zCox9FpyOEBNq8.woff) format('woff');
+        unicode-range: U+0370-03FF;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytqsA81DAeuqoeYxDcSOJPMY.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytoUt79146ZFaIJxILcpzmhI.woff) format('woff');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytolIZu-HDpmDIZMigmsroc4.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytjqR_3kx9_hJXbbyU8S6IN0.woff) format('woff');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* cyrillic-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA-S36XEWCHkcB1lVV5U7Zv8.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKAyk_NprmDuTMe6ZNb2XT6F0.woff) format('woff');
+        unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA-Z7HcNP3hh35ENBlkfUajE.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKA1qQwgjTnk_Nvsyjd7gmcn8.woff) format('woff');
+        unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* greek-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA4BrlVs03822P1mxoSnc7KY.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKA_XGQ2zFklq0BS5_Iep93MM.woff) format('woff');
+        unicode-range: U+1F00-1FFF;
+      }
+      /* greek */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA-JGFIOmtGeg8fQPdN29h_E.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKAxXa1O80pZ7GLXQpBwNdkLA.woff) format('woff');
+        unicode-range: U+0370-03FF;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA5A-et8bj3Rpvmq6f0RSK8U.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKAyiURDTH4ZeuJyFQH0IObys.woff) format('woff');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA8u2Q0OS-KeTAWjgkS85mDg.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKA9kZXW4sYc4BjuAIFc1SXII.woff) format('woff');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+	  
+	  
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 25%;
+        height: 92%;
+        float: left;
+        text-align: center;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+      }
+
+      .subtle {
+        color: #777;
+      }
+
+      li {
+        margin: 1em 0;
+      }
+
+      .pageref {
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        color: #777;
+        
+      }
+      .pageref:before {
+        content: "p. ";
+        color: #777;
+      }
+   
+      h1 {
+        color: #00539f;
+      }
+
+      img[src='../etc/IS Logo.png'] {
+        position: absolute;
+        bottom: 10px;
+	left: 10px;
+      }
+
+      .square {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width:15px;
+        height: 75%;
+        background-color: #0065A7;
+      }
+
+      .square_upper {
+        position: absolute;
+        right: 0;
+        bottom: 75%;
+        width:15px;
+        height: 100px;
+        background-color: #007bbf;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: middle, left
+name: section
+layout: true
+---
+class: middle, left
+name: lab
+layout: true
+{{ content }}
+# LAB 
+---
+class: top, left
+name: default
+layout: true
+![Info Support b.v.](../etc/IS Logo.png)
+.square[]
+.square_upper[]
+
+---
+class: center, middle
+# Info Support Data Science eXperience
+Lab 2 - Predictive Analytics
+---
+
+# 1.0 - Data inlezen
+Eerst moeten we de dataset inlezen. De data in bestand "bike rental uci dataset.csv" is klaar om ingeladen te worden.
+Hint: gebruik de functie read.csv()
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Probeer eerst zelf de dataset in te lezen. Kom je er niet uit? Klik dan hier om de code te tonen.
+]
+.expanded_content[
+```R
+bike.dat <- read.csv('bike rental uci dataset.csv');
+```
+]
+.collapsed_content[
+```R
+         <- read.csv(                             );
+```
+]]]
+
+---
+
+# 1.1 - Evaluatie functie (1/2)
+Om te kunnen evalueren hoe goed ons model de data gaat voorspellen moeten we een maat nemen die uitdrukt hoe groot de fout is van de voorspelling.
+Hiervoor gebruiken we in deze lab de <i>mean absolute error</i> (gemiddelde absolute fout).
+Deze functie krijg je cadeau, dus kopieer de volgende functie, plak het in de R console en geef een [Enter].
+
+```R
+mae <- function (actual, predicted) {
+	lengte <- length(actual);
+	if ( lengte != length(predicted) ) {
+		stop("Length of actual and predicted values must be equal!");
+	}
+	
+	som <- 0;
+	for (i in 1:lengte) {
+		som <- som + abs( actual[i] - predicted[i] );
+	}
+	return ( som / lengte );
+}
+```
+
+---
+
+# 1.2 - Evaluatie functie (2/2)
+Je kan de functie even doorlopen om precies te begrijpen wat er gebeurt, maar dit is niet nodig om de rest van het lab uit te kunnen voeren.
+Om zeker te weten dat je de functie goed hebt overgenomen kan je testen op de volgende input:
+
+```R
+mae( c(1:20),c(20:1) );
+# [1] 10
+mae( c(-50:50),rep(-10,101) );
+# [1] 26.23762
+mae( c(1:10),c(1:20) );
+# Error in mae(c(1:10), c(1:20)) : 
+#   Length of actual and predicted values must be equal!
+```
+
+---
+
+# 2.0 - Regressiemodel bouwen (1/2)
+We gaan een linear regressie model leren. Gebruik de functie "lm". Hint: in R, typ "?lm" voor meer informatie over deze functie.
+De variabele die we willen voorspellen is "cnt", het totaal aantal verhuurde fietsen.
+De variabelen die we als input gaan gebruiken zijn "holiday", "workingday" en "weekday".
+Als data nemen we de gehele set die we eerder ingeladen hebben.
+Ken het model toe aan een variabele.
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lm()
+]
+.expanded_content[
+```R
+bike.model <- lm(cnt ~ holiday + workingday + weekday, data = bike.dat);
+```
+]
+.collapsed_content[
+```R
+           <- lm(                                    ,                );
+```
+]]]
+
+---
+
+# 2.1 - Regressiemodel bouwen (2/2)
+
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Inspecteer het model (variabele waaraan je het model hebt toegekend) met summary(). Met de juiste call (hieronder verborgen) zou de output als volgt moeten zijn. Zoals eerder besproken is voornamelijk de kolom "Estimate" van belang, de rest van de (statistische) cijfers laten we even achterwege.
+]
+.expanded_content[
+```R
+summary(bike.model);
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-196.39 -147.28  -47.40   90.76  783.91 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  177.396      3.292  53.883  < 2e-16 ***
+holiday      -24.422      8.538  -2.860  0.00424 ** 
+workingday     9.255      3.053   3.032  0.00243 ** 
+weekday        2.148      0.689   3.117  0.00183 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 181.2 on 17375 degrees of freedom
+Multiple R-squared:  0.002054,	Adjusted R-squared:  0.001882 
+F-statistic: 11.92 on 3 and 17375 DF,  p-value: 8.549e-08
+```
+]
+.collapsed_content[
+```R
+summary(bike.model);
+```
+]]]
+
+---
+
+# 3.0 - Model evalueren (1/2)
+We gaan het model evalueren met de functie die we eerder gedefinieerd hebben, mean absolute error.
+We testen het model op dezelfde data als we op getraind hebben.<br/><br/>
+
+Gebruik het model om waarden te voorspellen voor de observaties in de hele dataset.
+Ken deze vector toe aan een variabele.
+Gebruik hiervoor de functie predict(). Deze heeft het model nodig wat we eerder gemaakt hebben en neemt daarnaast als input een data frame met dezelfde structuur als het data frame waarop het model getraind is. De daadwerkelijke waarden van de observaties mogen natuurlijk wel anders zijn.
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; predict()
+]
+.expanded_content[
+```R
+predicted <- predict(bike.model, newdata = bike.dat);
+```
+]
+.collapsed_content[
+```R
+          <- predict(          ,                   );
+```
+]]]
+
+---
+
+# 3.1 - Model evalueren (2/2)
+De lengte van deze variabele (een vector) zou 17379 moeten zijn, controleer dit met de functie length().
+
+```R
+length(predicted);
+# [1] 17379
+```
+
+Roep nu de mean absolute error functie aan om de fout te berekenen.
+Gebruik voor de tweede parameter het echte aantal verhuurde fietsen. Neem daarvoor de juiste kolom uit de dataset.
+De uitkomst zou 142.1148 moeten zijn.
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mae()
+]
+.expanded_content[
+```R
+mae(bike.dat$cnt, predicted);
+# [1] 142.1148
+```
+]
+.collapsed_content[
+```R
+mae(            ,          );
+```
+]]]
+
+---
+
+# 3.2 - Beter model evalueren (1/2)
+Bouw nu een nieuw model zoals we net gedaan hebben met als input variabelen enkel "casual" en "registered".
+Hint: doorloop weer de stappen met lm(), predict() en mae().
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Probeer het eerst zelf, lukt het niet kan je hier de uitwerking zien.
+]
+.expanded_content[
+```R
+bike.model <- lm(cnt ~ casual + registered, data = bike.dat);
+predicted <- predict(bike.model, newdata = bike.dat);
+mae(bike.dat$cnt, predicted);
+```
+]
+.collapsed_content[
+```R
+           <- lm(                         ,                );
+          <- predict(          ,                   );
+mae(            ,          );
+```
+]]]
+
+---
+
+# 3.3 - Beter model evalueren (2/2)
+
+De uitkomst van onze evaluatiefunctie is nu 0. 
+```R
+[1] 0
+```
+
+Wanneer je dit getal met meer precisie zou berekenen (bijvoorbeeld in de 64-bits versie van R) zou de uitkomst van de fout 3.022153e-12 (voluit geschreven: 0.000000000003022153) zijn. Dit komt door een kleine berekeningsfout, het antwoord moet 0 zijn.
+```R
+[1] 3.022153e-12
+```
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Omdat de fout 0 is hebben we een model gevonden dat perfect kan voorspellen, hoe komt dit?
+Wat voor gevolgen heeft dit voor de bruikbaarheid van ons model?<br/>
+Hint: denk na over wat de target variabele en de input variabelen met elkaar gemeen hebben.
+]
+.expanded_content[
+De input variabelen (casual en registered) zijn samen precies de target variabele. Ofwel: deze variabelen bevatten precies de waarde die we willen voorspellen, daarom is onze voorspelling altijd perfect.
+Dit betekent dat we dit model niet kunnen gebruiken. Om de uitkomst te voorspellen zouden we die eerst moeten weten. Daarom kunnen we de variabelen casual en registered niet als input gebruiken om het aantal verhuurde fietsen te voorspellen.
+]
+.collapsed_content[
+
+]]]
+
+---
+
+# 3.4 - Beter model
+We kunnen best een beter model verzinnen dan de voorgaanden. Het klinkt aannemelijk dat het aantal verhuurde fietsen sterk afhangt van het weer.
+Bij slecht weer zijn sommige mensen geneigd niet te reizen of een andere manier van vervoer te nemen.
+Bouw een model dat de weerssituatie en de temperatuur als input heeft en evalueer het model.
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; beter model
+]
+.expanded_content[
+```R
+bike.model <- lm(cnt ~ weathersit + temp, data = bike.dat);
+predicted <- predict(bike.model, newdata = bike.dat);
+mae(bike.dat$cnt, predicted);
+```
+]
+.collapsed_content[
+```R
+           <- lm(                       ,                );
+          <- predict(          ,                   );
+mae(            ,          );
+```
+]]]
+
+De mean absolute error zou 124.4641 moeten zijn. Is dit beter of slechter dan het voorgaande model? Waarom?</br>
+Hint: mocht je mean absolute error anders zijn heb je waarschijnlijk andere input variabelen gebruikt, er zijn er meerdere die het weer beschrijven.
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+]
+.expanded_content[
+De mean absolute error is lager dan bij het model waarbij we alleen holiday, workingday en weekday gebruikten. Daarom is het model beter. Het weer is dus een betere voorspeller dan deze variabelen.
+]
+.collapsed_content[
+
+]]]
+
+---
+
+# 3.5 - Andere modellen
+Niet alleen het weer is van invloed op het aantal verhuurde fietsen, maar ook of het een werkdag of weekend betreft, het seizoen, etc.
+Bedenk welke factoren allemaal mee kunnen spelen om het aantal verhuurde fietsen zo goed mogelijk te voorspellen.
+Bouw dit model. Is dit een beter model? Waarom wel/niet?<br/>
+Hint: bekijk het model met de functie summary() en kijk naar de kolom "Estimate".
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Toelichting:
+]
+.expanded_content[
+In de kolom estimate kunnen we zien hoe de variabelen gebruikt worden in het getrainde model (hoe hoger hoe meer invloed). Het model is een betere voorspeller als de mean absolute lager lager is. Houd er echter rekening mee dat we de voorkeur geven aan een zo simpel mogelijk model dat de data zo goed mogelijk verklaard. Stel dat we een variabele toevoegen aan het model maar dit niet resulteert in een betere voorspelling dan laten we deze liever weg. Tegelijkertijd zou deze variabele plots wel een rol kunnen spelen als we ook een andere variabele toevoegen die een intercausaal verband legt.
+]
+.collapsed_content[
+
+]]]
+
+
+---
+class: center, middle
+# Advanced
+De oefeningen in de 'Advanced' sectie zijn een graadje moeilijker. Ze gaan ook uit van iets meer R-kennis en gericht op nieuwe inhoudelijke vragen.
+
+---
+
+# 4.0 - Advanced (1/5)
+Splits de dataset op in een training set en een test set.
+Om een realistisch scenario na te bootsen kies je een datum ergens in deze 2 jaar (2011-01-01 tot en met 2012-12-31) waarop je splitst. Alles voor die datum is training set, alles na die datum is test set.
+Train je model en test (met gegeven waarden ter validatie) de mean absolute error.
+In het voorbeeld hieronder nemen we als datum '2011-06-06'.<br/>
+```R
+train <- which(as.character(bike.dat$dteday) < '2011-06-06')
+bike.dat.train <- bike.dat[ train, ];
+bike.dat.test  <- bike.dat[-train, ];
+bike.model <- lm(cnt ~ weathersit + temp, data = bike.dat.train);
+predicted <- predict(bike.model, newdata = bike.dat.test);
+mae(bike.dat.test$cnt, predicted);
+#    3651 
+#135.0316
+```
+---
+
+# 4.1 - Advanced (2/5)
+Stel dat dit de echte situatie was en je model is geëvalueerd met de observaties in de test set.
+Ben je tevreden met dit resultaat? Waarom wel/niet?
+Was het een goede keus geweest deze datum te kiezen? Waarom wel/niet?<br/>
+
+Zou er op basis van je gekozen datum een bias gecreeerd kunnen zijn? Welke zou dit kunnen zijn?<br/>
+Afhankelijk van je antwoorden kan je andere datums proberen.
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Toelichting:
+]
+.expanded_content[
+We zien dat de mean absolute error wat hoger is dan voorheen. Dit komt op de eerste plaats omdat we nu minder data gebruiken om op te trainen. Daarnaast hebben we hier wel een ongelukkige datum gekozen. De training set bevat nu namelijk maar 6 maanden aan data (2 seizoenen) en de test set 18 maanden (alle seizoenen). Omdat we van 2 seizoenen geen data hebben gebruikt zal de invloed van het seizoen op ons model niet geleerd zijn. Dit probleem is op te lossen door te splitsen op '2012-01-01'. Effect hier zou weer zijn dat we eventuele trends door de jaren heen niet kunnen leren. Een andere optie zou zijn om willekeurig een deel voor training te gebruiken en de rest voor testen. Meestal gebeurt dit in een verhouding 70/30 of 80/20.
+]
+.collapsed_content[
+
+]]]
+
+---
+
+# 4.1 - Advanced (3/5)
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In onderstaand codevoorbeeld splitsen we de data set willekeurig op in plaats van op datum. Dus de training set bestaat uit de helft van de data set waarbij de rijen willekeurig worden gekozen. De andere helft vormt de test set. Probeer dit eerst zelf te maken, lukt het niet dan is de volledige uitwerking beschikbaar.
+]
+.expanded_content[
+```R
+set.seed(42);
+index <- 1:nrow(bike.dat);
+trainindex <- sample(index, trunc(length(index)/2));
+bike.dat.train <- bike.dat[trainindex, ];
+bike.dat.test <- bike.dat[-trainindex, ];
+
+bike.model <- lm(cnt ~ weathersit + temp, data = bike.dat.train);
+predicted <- predict(bike.model, newdata = bike.dat.test);
+mae(bike.dat.test$cnt, predicted);
+# 124.4719
+```
+]
+.collapsed_content[
+
+]]]
+
+---
+
+# 4.2 - Advanced (4/5)
+Als input variabele kunnen we nog veel meer uit de data halen. Bedenk en test of er een beter model te vinden is.<br/>
+Hints en ideeen:
+- "?formula" om ook de interactie tussen variabelen als input te gebruiken.
+- Voeg een variable toe aan de dataset die specificeert hoeveel fietsen op dezelfde dag, hetzelfde uur, een week eerder verhuurd zijn.
+- Gebruik als input het aantal fietsen die in de voorgaande 24 uur verhuurd zijn.
+
+---
+
+# 4.3 - Advanced (5/5)
+
+In onderstaand codevoorbeeld voegen we een nieuwe variabele toe. Deze drukt uit hoeveel fietsen het voorgaande uur verhuurd zijn. 
+```R
+n <- length(bike.dat$cnt);
+vorigUur <- c(bike.dat$cnt[1], bike.dat$cnt)[1:n];
+bike.dat$vorigUur <- vorigUur;
+bike.model <- lm(cnt ~ vorigUur, data = bike.dat);
+predicted <- predict(bike.model, newdata = bike.dat);
+mae(bike.dat$cnt, predicted);
+# 66.02507
+```
+
+
+
+
+    </textarea>
+	
+	
+	
+    <!--<script src="http://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">
+    </script>-->
+	<script src="../etc/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      //var slideshow = remark.create();
+		var slideshow = remark.create({
+		  // Set the slideshow display ratio
+		  // Default: '4:3'
+		  // Alternatives: '16:9', ...
+		  ratio: '16:9',
+
+		  // Navigation options
+		  navigation: {
+			// Enable or disable navigating using scroll
+			// Default: true
+			// Alternatives: false
+			scroll: true,
+
+			// Enable or disable navigation using touch
+			// Default: true
+			// Alternatives: false
+			touch: true,
+
+			// Enable or disable navigation using click
+			// Default: false
+			// Alternatives: true
+			click: false
+		  }
+});
+    </script>
+	
+	<script type="text/javascript">
+    $(".box").delegate(".nav.closed", "click", function(e) {
+        //if ($(e.target).hasClass("container")) {
+            $(this).parent().addClass("expanded");
+        //}
+    });
+  
+    $(".box").delegate(".container.expanded .nav", "click", function(e) {
+        $(this).parent().removeClass("expanded");
+        e.stopPropagation();
+    });
+	</script>
+	
+  </body>
+</html>

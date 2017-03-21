@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Info Support Data Science eXperience</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	
+	<script type="text/javascript" src="../etc/jquery-1.5.2.js"></script>
+		
+	<style type="text/css">
+	.container.collapsed{
+		/*background-color:red;
+		height: 88px;
+		margin-bottom: 10px;
+		margin-right: 10px;
+		width: 427px;*/
+	}
+	
+	.container.expanded{
+		/*background-color:green;
+		height: 300px;
+		margin-bottom: 10px;
+		margin-right: 10px;
+		width: 427px;*/
+	}
+	
+	.expanded_content {
+		display: none;
+	}
+	
+	.container.expanded .expanded_content {
+		display: block;
+	}
+	.container.expanded .collapsed_content {
+		display: none;
+	}
+	.expanded_content{
+		/* height:100px; */
+		color: darkgrey;
+		display: none;
+	}
+	
+	/*default state*/
+	.container.collapsed .nav {
+		/*height:20px;
+		width:20px;
+		background-color: black;
+		color:white;*/
+		/*background-image: url("../etc/toggle_expand_alt.png");
+		background-repeat: no-repeat;*/
+		background: url("../etc/toggle_expand_alt.png") no-repeat;
+		background-size: 30px 30px;
+	}
+	
+	.container.expanded .nav {
+		/*height:20px;
+		width:20px;
+		background-color: white;
+		color:black;   */
+		background: url("../etc/toggle_collapse_alt.png") no-repeat;
+		background-size: 30px 30px;
+	}
+	</style>
+	
+    <style type="text/css">
+      /*@import url(../etc/fonts.css);*/
+	  
+	  @font-face {
+	    font-family: 'Yanone Kaffeesatz';
+	    font-style: normal;
+	    font-weight: 400;
+		src: local('Yanone Kaffeesatz Regular'), local('YanoneKaffeesatz-Regular'), url(../etc/YDAoLskQQ5MOAgvHUQCcLaGiwYDZumYWHCJeOGLK6bU.woff2) format('woff2'), url(../etc/YDAoLskQQ5MOAgvHUQCcLcvyhSUCWNe0YoQkk3OBepg.woff) format('woff');
+  	  }
+
+      /*@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);*/
+	  
+	  @font-face {
+	    font-family: 'Droid Serif';
+	    font-style: normal;
+	    font-weight: 400;
+	    src: local('Droid Serif'), local('DroidSerif'), url(../etc/0AKsP294HTD-nvJgucYTaI4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2'), url(../etc/0AKsP294HTD-nvJgucYTaIbN6UDyHWBl620a-IRfuBk.woff) format('woff');
+	  }
+	  @font-face {
+	    font-family: 'Droid Serif';
+	    font-style: normal;
+	    font-weight: 700;
+	    src: local('Droid Serif Bold'), local('DroidSerif-Bold'), url(../etc/QQt14e8dY39u-eYBZmppwYlIZu-HDpmDIZMigmsroc4.woff2) format('woff2'), url(../etc/QQt14e8dY39u-eYBZmppwTqR_3kx9_hJXbbyU8S6IN0.woff) format('woff');
+	  }
+	  @font-face {
+	    font-family: 'Droid Serif';
+	    font-style: italic;
+	    font-weight: 400;
+	    src: local('Droid Serif Italic'), local('DroidSerif-Italic'), url(../etc/cj2hUnSRBhwmSPr9kS5898u2Q0OS-KeTAWjgkS85mDg.woff2) format('woff2'), url(../etc/cj2hUnSRBhwmSPr9kS5899kZXW4sYc4BjuAIFc1SXII.woff) format('woff');
+	  }
+	  
+      /*@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);*/
+	  
+	  /* cyrillic-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkbWJ8El2VFcUWHOh_Oq6BA8.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkSfE9Gpc2xZQgtwyMvPhThE.woff) format('woff');
+        unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkRLwxQbNcFnuWuPk3YnjToI.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkWOb2gHztoQeulij-1lvl-8.woff) format('woff');
+        unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* greek-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkXZwgMdXZ_smNJnor9b37uA.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkbUY-ErTxhuJNpt9lU8fcqw.woff) format('woff');
+        unicode-range: U+1F00-1FFF;
+      }
+      /* greek */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkVvp_UfalQ96C-39B62FvR4.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkX6qoo8ILXpvSLO10ucU3yI.woff) format('woff');
+        unicode-range: U+0370-03FF;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkag5eI2G47JWe0-AuFtD150.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkdIh4imgI8P11RFo6YPCPC0.woff) format('woff');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkY4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkYbN6UDyHWBl620a-IRfuBk.woff) format('woff');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* cyrillic-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytrLZkzWHE0Rai0z0KZwCYHE.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytjpEpsbGv0WCalYSBSSLSDI.woff) format('woff');
+        unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytqs1twL42OQU-XDphSlMXYM.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytlRROVH9Vvc8xHnAGvvgPQc.woff) format('woff');
+        unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* greek-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytuGaZ6kaGPxTsxBG85inVYY.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytkxkyJNiPQcjp3dyBORqq9o.woff) format('woff');
+        unicode-range: U+1F00-1FFF;
+      }
+      /* greek */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytpGgvICTqEy5bPQVoK8tr-Y.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytuSd7Sk-1zCox9FpyOEBNq8.woff) format('woff');
+        unicode-range: U+0370-03FF;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytqsA81DAeuqoeYxDcSOJPMY.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytoUt79146ZFaIJxILcpzmhI.woff) format('woff');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytolIZu-HDpmDIZMigmsroc4.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytjqR_3kx9_hJXbbyU8S6IN0.woff) format('woff');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* cyrillic-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA-S36XEWCHkcB1lVV5U7Zv8.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKAyk_NprmDuTMe6ZNb2XT6F0.woff) format('woff');
+        unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA-Z7HcNP3hh35ENBlkfUajE.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKA1qQwgjTnk_Nvsyjd7gmcn8.woff) format('woff');
+        unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* greek-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA4BrlVs03822P1mxoSnc7KY.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKA_XGQ2zFklq0BS5_Iep93MM.woff) format('woff');
+        unicode-range: U+1F00-1FFF;
+      }
+      /* greek */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA-JGFIOmtGeg8fQPdN29h_E.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKAxXa1O80pZ7GLXQpBwNdkLA.woff) format('woff');
+        unicode-range: U+0370-03FF;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA5A-et8bj3Rpvmq6f0RSK8U.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKAyiURDTH4ZeuJyFQH0IObys.woff) format('woff');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA8u2Q0OS-KeTAWjgkS85mDg.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKA9kZXW4sYc4BjuAIFc1SXII.woff) format('woff');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+	  
+	  
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 25%;
+        height: 92%;
+        float: left;
+        text-align: center;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+      }
+
+      .subtle {
+        color: #777;
+      }
+
+      li {
+        margin: 1em 0;
+      }
+
+      .pageref {
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        color: #777;
+        
+      }
+      .pageref:before {
+        content: "p. ";
+        color: #777;
+      }
+   
+      h1 {
+        color: #00539f;
+      }
+
+      img[src='../etc/IS Logo.png'] {
+        position: absolute;
+        bottom: 10px;
+	left: 10px;
+      }
+
+      .square {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width:15px;
+        height: 75%;
+        background-color: #0065A7;
+      }
+
+      .square_upper {
+        position: absolute;
+        right: 0;
+        bottom: 75%;
+        width:15px;
+        height: 100px;
+        background-color: #007bbf;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: middle, left
+name: section
+layout: true
+---
+class: middle, left
+name: lab
+layout: true
+{{ content }}
+# LAB 
+---
+class: top, left
+name: default
+layout: true
+![Info Support b.v.](../etc/IS Logo.png)
+.square[]
+.square_upper[]
+
+---
+class: center, middle
+# Info Support Data Science eXperience
+Lab 1 - Data-analyse met R
+---
+# Introductie
+We gaan in deze oefening een dataset gebruiken met gegevens uit allerlei fietsverhuursystemen.
+
+In veel steden rond de wereld is het tegenwoordig mogelijk om via een volledig geautomatiseerd systeem fietsen te huren. Het complete proces van huren, terugbrengen en onderhoud is geautomatiseerd. Gebruikers kunnen de fiets op een willekeurig fietspunt meenemen, en op een willekeurig fietspunt weer terugzetten (mits er plaatsen vrij zijn). Op dit moment zijn er over de gehele wereld meer dan 500 van dit soort systemen, die bij elkaar zo’n 500.000 fietsen bevatten.
+
+Naast dat deze oplossingen interessante verkeers- en milieu-aspecten bieden, is de data die deze systemen verzamelen interessant. In tegenstelling tot ander openbaar vervoer (bus, tram, etc.) wordt hier namelijk exact bijgehouden hoe lang de route duurt, waar iemand vertrekt en waar iemand weer aankomt. 
+---
+# 1.0 Data inlezen
+Eerst moeten we de dataset inlezen. De data in bestand "Bike Rental UCI dataset.csv" is kant en klaar.
+Hint: gebruik de functie read.csv()
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Probeer eerst zelf de dataset in te lezen. Kom je er niet uit? Klik dan hier om de code te tonen.
+]
+.expanded_content[
+```R
+bike.dat <- read.csv('bike rental uci dataset.csv');
+```
+]
+.collapsed_content[
+```R
+         <- read.csv(                             );
+```
+]]]
+
+---
+# 1.1 Verkennen van de dataset (1/2)
+Om een idee te krijgen hoe de dataset eruit ziet, vragen we het aantal rijen en kolommen van de dataset op.
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Probeer het eerst zelf uit te vinden. Kom je er niet uit? Klik dan hier om de code te tonen.
+]
+.expanded_content[
+```R
+colnames(bike.dat)
+```
+]
+.collapsed_content[
+```R
+colnames
+```
+]]]
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Probeer het eerst zelf uit te vinden. Kom je er niet uit? Klik dan hier om de code te tonen.
+]
+.expanded_content[
+```R
+nrow(bike.dat)
+```
+]
+.collapsed_content[
+```R
+nrow
+```
+]]]
+
+Bekijk ook de eerste, derde en vijfde rij van de verhuurgegevens. Bekijk daarna de onderste 10 rijen met de functie tail.
+```R
+bike.dat[1,]
+bike.dat[3,]
+bike.dat[5,]
+tail(bike.dat, 10)
+```
+---
+# 1.2 Verkennen van de dataset (2/2)
+Je kunt ook met één commando meerdere rijen weergeven. Dat doe je door in plaats van een getal op te geven, een vector met getallen mee te geven aan R.
+Hieronder zie je een aantal manieren om een vector te maken. Probeer deze uit, en kijk of je ze nog begrijpt.
+```R
+c("a", 2, 5)
+1:10
+c(1:3,5)
+```
+
+Probeer nu met één commando de rijen 1 t/m 10, 19, en 51 t/m 53 weer te geven.
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Probeer het eerst zelf uit te vinden. Kom je er niet uit? Klik dan hier om de code te tonen.
+]
+.expanded_content[
+```R
+bike.dat[c(1:10,19,51:53),]
+```
+]
+.collapsed_content[
+```R
+bike.dat[]
+```
+]]]
+---
+# 1.3 Dataset aanpassen: nieuwe kolomnamen
+Niet alle kolomnamen zijn even duidelijk. Geef daarom de volgende nieuwe namen aan de kolommen. De kolomnamen staan op de juiste volgorde.
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tip: maak een vector, en wijs deze toe aan de kolomnamen van 'bike.dat'.
+]
+.expanded_content[
+```R
+colnames(bike.dat) <- c("ID", "date", "season", "year", "month", "hour", "holiday", "weekday", "workingday", 
+	"weather", "temp", "atemp", "humidity", "windspeed", "n_casual", "n_registered", "n_total")
+```
+]
+.collapsed_content[
+```R
+                        "ID", "date", "season", "year", "month", "hour", "holiday", "weekday", "workingday", 
+	"weather", "temp", "atemp", "humidity", "windspeed", "n_casual", "n_registered", "n_total"
+```
+]]]
+---
+# 1.4 Samenvatting van de dataset bekijken.
+Bekijk de samenvatting van de dataset met behulp van de functie summary, en bestudeer de laagste en hoogste waarden van de kolommen ‘temp’, ‘atemp’, ‘humidity’ en ‘windspeed’. Verklaar wat je hier ziet. Zijn dit meetfouten, of is hier iets anders aan de hand?
+```R
+summary(bike.dat)
+```
+(Op de volgende slide staat de verklaring van wat je ziet)
+---
+# 2.0 De dataset begrijpen
+De waarden van de kolommen 'temp', 'atemp', 'humidity' en 'windspeed' liggen tussen de 0 en 1. Uiteraard zijn dit niet de juiste waarden, maar het zijn ook geen meetfouten. De data is *genormaliseerd*.
+
+Hieronder staat een tabel waarin aangegeven is welke factor is gebruikt voor deze normalisering.
+
+<table>
+	<tr>
+		<td>Kolom</td>
+		<td align="right">Factor</td>
+	</tr>
+	<tr>
+		<td>Temp</td>
+		<td align="right">41</td>
+	</tr>
+	<tr>
+		<td>Atemp</td>
+		<td align="right">50</td>
+	</tr>
+	<tr>
+		<td>Humidity</td>
+		<td align="right">100</td>
+	</tr>
+	<tr>
+		<td>Windspeed</td>
+		<td align="right">67</td>
+	</tr>
+</table>
+
+Wanneer er dus een luchtvochtigheid van 0,8 aanwezig is in de data, wordt hier daadwerkelijk een luchtvochtigheid van 80% bedoeld.
+---
+# 2.1 De dataset verrijken (1/2)
+
+Voeg nu vier nieuwe kolommen aan de dataset toe waar de exacte (niet-genormaliseerde) waarden voor deze gegevens in opgenomen staan. Noem de kolommen hetzelfde als de originele kolommen, maar dan met de postfix '_e'. Naast de kolom 'temp' komt er dus een nieuwe kolom 'temp_e' bij.
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Voor temp staat de code hieronder al uitgewerkt. Voeg de andere kolommen zelf toe met behulp van de informatie van de vorige slide.
+]
+.expanded_content[
+```R
+bike.dat$temp_e = bike.dat$temp * 41
+bike.dat$atemp_e = bike.dat$atemp * 50
+bike.dat$humidity_e = bike.dat$humidity * 100
+bike.dat$windspeed_e = bike.dat$windspeed * 67
+```
+]
+.collapsed_content[
+```R
+bike.dat$temp_e = bike.dat$temp * 41
+         atemp_e
+         humidity_e
+         windspeed_e
+```
+]]]
+---
+# 2.2 De dataset verrijken (2/2)
+Bekijk nu opnieuw de gemiddelden. Zijn de waarden nu wel correct?
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Denk na over de gegevens die hier genormaliseerd zijn. Kun je een voor- en een nadeel bedenken?
+]
+.expanded_content[
+- Voordeel: Het bestuderen van factoren die elkaar beïnvloeden wordt makkelijker, omdat overal dezelfde schaal gebruikt wordt
+- Nadeel: Waarden zijn niet direct afleesbaar
+]
+.collapsed_content[
+- Voordeel: 
+- Nadeel: 
+]]]
+---
+# 2.3 Betekenis kolommen (1/2)
+In de tabel hieronder en op de volgende slide staan alle kolommen uit de dataset met hun betekenis. Vraag de kolomnamen van de dataset op, en conctroleer of alle kolomnamen uit onderstaande tabel overeenkomen.
+<table>
+	<tr><td width=200>Veldnaam</td><td>Betekenis</td></tr>
+	<tr><td>id</td><td>Record index</td></tr>
+	<tr><td>date</td><td>Datum</td></tr>
+	<tr><td>season</td><td>Seizoen (1: lente, 2: zomer, 3: herfst, 4: winter)</td></tr>
+	<tr><td>year</td><td>Jaar (0: 2011, 1: 2012)</td></tr>
+	<tr><td>month</td><td>Maand (1 t/m 12)</td></tr>
+	<tr><td>hour</td><td>Uur (0 t/m 23)</td></tr>
+	<tr><td>holiday</td><td>Vakantie-indicator (1 = vakantie, 0 = niet)</td></tr>
+	<tr><td>weekday</td><td>Dag van de week</td></tr>
+	<tr><td>workingday</td><td>Werkdag-indicator (1 = werkdag, 0 = weekend en/of vakantie)</td></tr>
+</table>
+---
+# 2.4 Betekenis kolommen (2/2)
+<table>
+	<tr><td width=200>Veldnaam</td><td>Betekenis</td></tr>
+	<tr><td style="vertical-align: top">weather</td><td>Weerindicatie:<br />
+	<ol>
+		<li>Helder, lichtbewolkt, bewolkt</li>
+		<li>Mistig ( > 1 km zicht)</li>
+		<li>Lichte sneeuw, lichte regen + onweer, lichte regen</li>
+		<li>zware regenval + ijzel + onweer + mist (> 1 km zicht), sneeuw + mist (< 1 km zicht)</li>
+	</ol>
+	</td></tr>
+	<tr><td>temp</td><td>Genormaliseerde temperatuur (Celsius)</td></tr>
+	<tr><td>atemp</td><td>Genormaliseerde gevoelstemperatuur (Celsius)</td></tr>
+	<tr><td>humidity</td><td>Genormaliseerde luchtvochtigheid (%)</td></tr>
+	<tr><td>windspeed</td><td>Genormaliseerde windsnelheid</td></tr>
+	<tr><td>n_casual</td><td>Aantal casual gebruikers</td></tr>
+	<tr><td>n_registered</td><td>Aantal geregistreerde gebruikers</td></tr>
+	<tr><td>n_total</td><td>Totaal aantal fietsen verhuurd</td></tr>
+</table>
+---
+# 3.0 Opsplitsen in kleinere subsets
+Met behulp van het volgende commando wordt voor elke rij in de dataset weergegeven of deze in het zomerseizoen valt of niet.
+```R
+bike.dat$season==2
+```
+
+Deze set aan TRUE / FALSE-waarden kun je meegeven aan een dataset. Rijen die met FALSE aangemerkt staan worden in het resultaat weggelaten, rijen die met TRUE aangemerkt staan komen als resultaat terug. Probeer hiermee een dataset te maken van alle rijen die in de zomer vallen, en sla het resultaat op in de variabele `bike.dat.summer`.
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Probeer dit eerst zelf. Wanneer je er niet uit komt, kun je de oplossing "uitklappen".
+]
+.expanded_content[
+```R
+bike.dat.summer <- bike.dat[bike.dat$season==2,]
+```
+]
+.collapsed_content[
+```R
+                            bike.dat$season==2
+```
+]]]
+Doe ditzelfde ook voor de overige seizoenen, en sla die op in de variabelen `bike.dat.spring`, `bike.dat.autumn` en `bike.dat.winter`.
+
+---
+# 3.1 Vergelijken van de seizoenen (1/2)
+Bekijk nu de gemiddelde fietsverhuur in de vier seizoenen met behulp van de functie `mean`. 
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Maak hier een vector van, en sla de gegevens op in variabele `total_rentals_per_season`.
+]
+.expanded_content[
+```R
+total_rentals_per_season <- c(
+	mean(bike.dat.spring$n_total),
+	mean(bike.dat.summer$n_total),
+	mean(bike.dat.autumn$n_total),
+	mean(bike.dat.winter$n_total)
+)
+```
+]
+.collapsed_content[
+```R
+total_rentals_per_season <- 
+```
+]]]
+
+Wanneer worden er het meeste fietsen verhuurd?
+
+
+<sub>(Wanneer je een foutmelding tegenkomt, ben je waarschijnlijk de laatste opdracht op de vorige slide vergeten.)</sub>
+---
+# 3.2 Vergelijken van de seizoenen (2/2)
+Duik nu wat dieper de cijfers in en beantwoord de volgende vragen:
+- Hoeveel *casual* huurders zijn er gemiddeld per jaargetijde?
+- Hoeveel geregistreerde huurders zijn er gemiddeld per jaargetijde?
+- Wat zijn de percentages geregistreerde huurders per jaargetijde?
+Sla de antwoorden op in de variabelen `rentals.casual`, `rentals.registered` en `rentals.registered.pct`. Doe dit opnieuw in een vector, evenals in de vorige opdracht.
+
+Maak daarnaast een vector in de variabele `seasons`, met daarin de namen van de vier seizoenen.
+
+Op de volgende slide zijn antwoord-scripts te vinden.
+---
+# 3.3 Scripts voor vergelijken van de seizoenen.
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Probeer de vragen eerst zelf te beantwoorden! Kom je er niet uit, dan vind je hier de antwoord-scripts.
+]
+.expanded_content[
+```R
+rentals.casual <- c(
+	mean(bike.dat.spring$n_casual),
+	mean(bike.dat.summer$n_casual),
+	mean(bike.dat.autumn$n_casual),
+	mean(bike.dat.winter$n_casual)
+)
+rentals.registered <- c(
+	mean(bike.dat.spring$n_registered),
+	mean(bike.dat.summer$n_registered),
+	mean(bike.dat.autumn$n_registered),
+	mean(bike.dat.winter$n_registered)
+)
+rentals.registered.pct <- c(
+	mean(bike.dat.spring$n_registered) / mean(bike.dat.spring$n_total),
+	mean(bike.dat.summer$n_registered) / mean(bike.dat.summer$n_total),
+	mean(bike.dat.autumn$n_registered) / mean(bike.dat.autumn$n_total),
+	mean(bike.dat.winter$n_registered) / mean(bike.dat.winter$n_total)
+)
+seasons <- c("Spring", "Summer", "Autumn", "Winter")
+```
+]
+.collapsed_content[
+```R
+rentals.casual <- 
+rentals.registered <- 
+rentals.registered.pct <- 
+seasons <- 
+```
+]]]
+---
+# 3.4 Dataframes maken (1/2)
+Een `dataframe` is een tabel in R. Een voorbeeld van een dataframe waar je al mee gewerkt hebt zijn de datasets `bike.dat` en alle afgeleiden (`bike.dat.summer` etc.).
+
+Om onze gegevens die we zojuist berekend hebben overzichtelijk in te zien, gaan we deze bij elkaar zetten in één dataframe. Dit kan eenvoudig door enkele vectors van dezelfde lengte op te nemen als kolommen, en deze te combineren.
+
+Loop door het volgende voorbeeld heen:
+```R
+vector1 <- c(1,2,3)
+vector2 <- c(4,5,6)
+mijndf <- data.frame(vector1, vector2)
+```
+Bekijk nu de inhoud van `mijndf`.  Zoals je ziet zijn de vectors als kolommen naast elkaar komen te staan, en hebben de kolommen de namen gekregen van de oorspronkelijke vectors.
+---
+# 3.5 Dataframes maken (2/2)
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Maak op dezelfde manier een dataframe voor de gegevens die we hiervoor berekend hebben, zodat de verhoudingen van *casual* en geregistreerde huurders per seizoen inzichtelijk worden.
+]
+.expanded_content[
+```R
+data.frame(seasons, rentals.casual, rentals.registered, rentals.registered.pct, total_rentals_per_season)
+```
+]
+.collapsed_content[
+<br />
+Wanneer je er niet uitkomt, klap dan het antwoord uit.
+]]]
+<br />
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Vergelijk nu de vaste versus de *casual* huurders door de jaargetijden heen. Hoe zijn de absolute aantallen? En de verhoudingen? Hoe zijn die te verklaren?
+]
+.expanded_content[
+- Absolute aantallen: In de zomer worden er meer fietsen verhuurd dan in de winter. In de zomer vindt er echter minder verhuur plaats aan *geregistreerde*  gebruikers. In de herfst zijn er zowel meer casual als meer geregistreerde gebruikers.
+- Verhoudingen: In de zomer zijn er meer *casual* huurders, en minder geregistreerde. De percentages geregistreerde huurders zijn het hoogst in de lente.
+- Verklaring: In de zomer is er waarschijnlijk meer toerisme (en dus meer *casual* verhuur). Tegelijk zullen veel geregistreerde gebruikers zelf ook op vakantie gaan in de zomer (dus minder *geregistreerde* verhuur). In de herfst (na de zomer) zullen meer mensen geneigd zijn de fiets te pakken, terwijl het weer in de winter kan leiden tot "afhakers".
+]
+.collapsed_content[
+- Absolute aantallen
+- Verhoudingen
+- Verklaring voor aantallen en verhoudingen
+]]]
+---
+# 3.6 Grotere doorsnedes maken (1/2)
+In opdracht 3.3 hebben we gekeken naar het berekenen van gemiddelden voor de vier jaargetijden. 
+In plaats van het gebruiken van 4 verschillende datasets zoals we in opdracht 3.3 deden, zouden we ook met de functie `lapply` kunnen werken. In dit geval worden voor meerdere datasets dezelfde opdracht uitgevoerd:
+```R
+lapply(1:4, function(x) mean(bike.dat[bike.dat$season==x,]$n_total))
+```
+Letterlijk staat hier: voor alle items in de vector `1:4` voer je de volgende functie uit, waarbij de `x` staat voor het item uit de lijst `1:4` dat je op dat moment doorloopt:
+```R
+mean(bike.dat[bike.dat$season==x,]$n_total)
+``` 
+
+Probeer handmatig waarden voor `x` in te vullen en te begrijpen wat deze functie doet.
+
+---
+# 3.7 Grotere doorsnedes maken (2/2)
+Wanneer we de dataset opsplitsen in vier seizoenen, kunnen we prima met vier losse variabelen werken. Maar wat nu als we voor elke maand willen kijken wat de gemiddelde verhuur is? Twaalf datasets berekenen en bijhouden wordt een vervelend klusje.
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zet de voorbeeldfunctie om naar een functie die de dataset opsplitst per maand, en kijk in welke *maand* er het meeste fietsen verhuurd worden.
+]
+.expanded_content[
+```R
+lapply(1:12, function(x) mean(bike.dat[bike.dat$month==x,]$n_total))
+```
+]
+.collapsed_content[
+```R
+lapply(1:4, function(x) mean(bike.dat[bike.dat$season==x,]$n_total))
+```
+]]]
+
+Wanneer je de functie werkend hebt, vervang `lapply` dan door `sapply`. Dit zorgt er in de basis voor dat je de gegevens niet als `list`, maar als `vector` terugkrijgt.
+---
+class: center, middle
+# Advanced
+De oefeningen in de 'Advanced' sectie zijn een graadje moeilijker. Ze zijn ook iets meer op R-kennis gericht en niet per sé direct over nieuwe inhoudelijke vragen.
+---
+# 4.0 Advanced: Apply
+Niet alleen gegevens, ook van functies kunnen vectors gemaakt worden:
+```R
+functies <- c(mean, median, max, min)
+functies[[1]](bike.dat$month)
+functies[[2]](bike.dat$month)
+functies[[3]](bike.dat$month)
+functies[[4]](bike.dat$month)
+```
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Probeer dit toe te passen op de fietsen-dataset. Lukt het om met één `sapply`-opdracht van de dataset zowel het gemiddelde, het maximum als het minimum van het aantal verhuurde fietsen te berekenen?
+]
+.expanded_content[
+```R
+sapply(c(mean, max, min), function(x) x(bike.dat$n_total))
+```
+]
+.collapsed_content[
+```R
+sapply(                 ,                                )
+```
+]]]
+
+---
+# 4.1 Advanced: Geneste Apply-functies
+Nu we de `mean`, `max` en `min`-functies in één keer kunnen uitvoeren, willen we dit ook doen voor alle maanden in de dataset.
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De opdracht is nu als volgt: maak met één opdracht (tip: een apply-functie kan op het resultaat van een andere apply-functie verderbouwen) een variabele waarin per maand wordt weergegeven wat de hoogste, laagste en gemiddelde fietsverhuur was in die maand. Probeer hierbij de maanden op de rijen te krijgen, en de functies op de kolommen.
+]
+.expanded_content[
+```R
+sapply(
+	c(mean, max, min), 
+	function(x) 
+		sapply(
+			1:12, 
+			function(y) 
+				x(bike.dat[bike.dat$month==y,]$n_total)
+		)
+	)
+```
+]
+.collapsed_content[
+```R
+sapply(
+	
+	
+	
+	
+	
+	
+	
+	)
+```
+]]]
+    </textarea>
+	
+	
+	
+	
+    <!--<script src="http://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">
+    </script>-->
+	<script src="../etc/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      //var slideshow = remark.create();
+		var slideshow = remark.create({
+		  // Set the slideshow display ratio
+		  // Default: '4:3'
+		  // Alternatives: '16:9', ...
+		  ratio: '16:9',
+
+		  // Navigation options
+		  navigation: {
+			// Enable or disable navigating using scroll
+			// Default: true
+			// Alternatives: false
+			scroll: true,
+
+			// Enable or disable navigation using touch
+			// Default: true
+			// Alternatives: false
+			touch: true,
+
+			// Enable or disable navigation using click
+			// Default: false
+			// Alternatives: true
+			click: false
+		  }
+});
+    </script>
+	
+	<script type="text/javascript">
+    $(".box").delegate(".nav.closed", "click", function(e) {
+        //if ($(e.target).hasClass("container")) {
+            $(this).parent().addClass("expanded");
+        //}
+    });
+  
+    $(".box").delegate(".container.expanded .nav", "click", function(e) {
+        $(this).parent().removeClass("expanded");
+        e.stopPropagation();
+    });
+	</script>
+	
+  </body>
+</html>

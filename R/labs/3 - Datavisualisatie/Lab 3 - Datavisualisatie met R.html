@@ -1,0 +1,1010 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Info Support Data Science eXperience</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	
+	<script type="text/javascript" src="../etc/jquery-1.5.2.js"></script>
+		
+	<style type="text/css">
+	.container.collapsed{
+		/*background-color:red;
+		height: 88px;
+		margin-bottom: 10px;
+		margin-right: 10px;
+		width: 427px;*/
+	}
+	
+	.container.expanded{
+		/*background-color:green;
+		height: 300px;
+		margin-bottom: 10px;
+		margin-right: 10px;
+		width: 427px;*/
+	}
+	
+	.expanded_content {
+		display: none;
+	}
+	
+	.container.expanded .expanded_content {
+		display: block;
+	}
+	.container.expanded .collapsed_content {
+		display: none;
+	}
+	.expanded_content{
+		/* height:100px; */
+		color: darkgrey;
+		display: none;
+	}
+	
+	/*default state*/
+	.container.collapsed .nav {
+		/*height:20px;
+		width:20px;
+		background-color: black;
+		color:white;*/
+		/*background-image: url("../etc/toggle_expand_alt.png");
+		background-repeat: no-repeat;*/
+		background: url("../etc/toggle_expand_alt.png") no-repeat;
+		background-size: 30px 30px;
+	}
+	
+	.container.expanded .nav {
+		/*height:20px;
+		width:20px;
+		background-color: white;
+		color:black;   */
+		background: url("../etc/toggle_collapse_alt.png") no-repeat;
+		background-size: 30px 30px;
+	}
+	</style>
+	
+    <style type="text/css">
+      /*@import url(../etc/fonts.css);*/
+	  
+	  @font-face {
+	    font-family: 'Yanone Kaffeesatz';
+	    font-style: normal;
+	    font-weight: 400;
+		src: local('Yanone Kaffeesatz Regular'), local('YanoneKaffeesatz-Regular'), url(../etc/YDAoLskQQ5MOAgvHUQCcLaGiwYDZumYWHCJeOGLK6bU.woff2) format('woff2'), url(../etc/YDAoLskQQ5MOAgvHUQCcLcvyhSUCWNe0YoQkk3OBepg.woff) format('woff');
+  	  }
+
+      /*@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);*/
+	  
+	  @font-face {
+	    font-family: 'Droid Serif';
+	    font-style: normal;
+	    font-weight: 400;
+	    src: local('Droid Serif'), local('DroidSerif'), url(../etc/0AKsP294HTD-nvJgucYTaI4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2'), url(../etc/0AKsP294HTD-nvJgucYTaIbN6UDyHWBl620a-IRfuBk.woff) format('woff');
+	  }
+	  @font-face {
+	    font-family: 'Droid Serif';
+	    font-style: normal;
+	    font-weight: 700;
+	    src: local('Droid Serif Bold'), local('DroidSerif-Bold'), url(../etc/QQt14e8dY39u-eYBZmppwYlIZu-HDpmDIZMigmsroc4.woff2) format('woff2'), url(../etc/QQt14e8dY39u-eYBZmppwTqR_3kx9_hJXbbyU8S6IN0.woff) format('woff');
+	  }
+	  @font-face {
+	    font-family: 'Droid Serif';
+	    font-style: italic;
+	    font-weight: 400;
+	    src: local('Droid Serif Italic'), local('DroidSerif-Italic'), url(../etc/cj2hUnSRBhwmSPr9kS5898u2Q0OS-KeTAWjgkS85mDg.woff2) format('woff2'), url(../etc/cj2hUnSRBhwmSPr9kS5899kZXW4sYc4BjuAIFc1SXII.woff) format('woff');
+	  }
+	  
+      /*@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);*/
+	  
+	  /* cyrillic-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkbWJ8El2VFcUWHOh_Oq6BA8.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkSfE9Gpc2xZQgtwyMvPhThE.woff) format('woff');
+        unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkRLwxQbNcFnuWuPk3YnjToI.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkWOb2gHztoQeulij-1lvl-8.woff) format('woff');
+        unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* greek-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkXZwgMdXZ_smNJnor9b37uA.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkbUY-ErTxhuJNpt9lU8fcqw.woff) format('woff');
+        unicode-range: U+1F00-1FFF;
+      }
+      /* greek */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkVvp_UfalQ96C-39B62FvR4.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkX6qoo8ILXpvSLO10ucU3yI.woff) format('woff');
+        unicode-range: U+0370-03FF;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkag5eI2G47JWe0-AuFtD150.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkdIh4imgI8P11RFo6YPCPC0.woff) format('woff');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(../etc/ViZhet7Ak-LRXZMXzuAfkY4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2'), url(../etc/ViZhet7Ak-LRXZMXzuAfkYbN6UDyHWBl620a-IRfuBk.woff) format('woff');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* cyrillic-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytrLZkzWHE0Rai0z0KZwCYHE.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytjpEpsbGv0WCalYSBSSLSDI.woff) format('woff');
+        unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytqs1twL42OQU-XDphSlMXYM.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytlRROVH9Vvc8xHnAGvvgPQc.woff) format('woff');
+        unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* greek-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytuGaZ6kaGPxTsxBG85inVYY.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytkxkyJNiPQcjp3dyBORqq9o.woff) format('woff');
+        unicode-range: U+1F00-1FFF;
+      }
+      /* greek */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytpGgvICTqEy5bPQVoK8tr-Y.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytuSd7Sk-1zCox9FpyOEBNq8.woff) format('woff');
+        unicode-range: U+0370-03FF;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytqsA81DAeuqoeYxDcSOJPMY.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytoUt79146ZFaIJxILcpzmhI.woff) format('woff');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(../etc/ceqTZGKHipo8pJj4molytolIZu-HDpmDIZMigmsroc4.woff2) format('woff2'), url(../etc/ceqTZGKHipo8pJj4molytjqR_3kx9_hJXbbyU8S6IN0.woff) format('woff');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+      /* cyrillic-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA-S36XEWCHkcB1lVV5U7Zv8.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKAyk_NprmDuTMe6ZNb2XT6F0.woff) format('woff');
+        unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA-Z7HcNP3hh35ENBlkfUajE.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKA1qQwgjTnk_Nvsyjd7gmcn8.woff) format('woff');
+        unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* greek-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA4BrlVs03822P1mxoSnc7KY.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKA_XGQ2zFklq0BS5_Iep93MM.woff) format('woff');
+        unicode-range: U+1F00-1FFF;
+      }
+      /* greek */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA-JGFIOmtGeg8fQPdN29h_E.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKAxXa1O80pZ7GLXQpBwNdkLA.woff) format('woff');
+        unicode-range: U+0370-03FF;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA5A-et8bj3Rpvmq6f0RSK8U.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKAyiURDTH4ZeuJyFQH0IObys.woff) format('woff');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(../etc/KAKuHXAHZOeECOWAHsRKA8u2Q0OS-KeTAWjgkS85mDg.woff2) format('woff2'), url(../etc/KAKuHXAHZOeECOWAHsRKA9kZXW4sYc4BjuAIFc1SXII.woff) format('woff');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+      }
+	  
+	  
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 25%;
+        height: 92%;
+        float: left;
+        text-align: center;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+      }
+
+      .subtle {
+        color: #777;
+      }
+
+      li {
+        margin: 1em 0;
+      }
+
+      .pageref {
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        color: #777;
+        
+      }
+      .pageref:before {
+        content: "p. ";
+        color: #777;
+      }
+   
+      h1 {
+        color: #00539f;
+      }
+
+      img[src='../etc/IS Logo.png'] {
+        position: absolute;
+        bottom: 10px;
+	left: 10px;
+      }
+
+      .square {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width:15px;
+        height: 75%;
+        background-color: #0065A7;
+      }
+
+      .square_upper {
+        position: absolute;
+        right: 0;
+        bottom: 75%;
+        width:15px;
+        height: 100px;
+        background-color: #007bbf;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: middle, left
+name: section
+layout: true
+---
+class: middle, left
+name: lab
+layout: true
+{{ content }}
+# LAB 
+---
+class: top, left
+name: default
+layout: true
+![Info Support b.v.](../etc/IS Logo.png)
+.square[]
+.square_upper[]
+
+---
+class: center, middle
+# Info Support Data Science eXperience
+Lab 3 - Datavisualisatie met R
+---
+# Introductie datavisualisatie
+In deze module proberen we met behulp van visualisaties meer inzicht te krijgen in de data.
+We gebruiken daarbij opnieuw R, omdat inmiddels het een bekende omgeving is.
+Het doel is echter om te laten zien hoe we met behulp van visualisaties meer inzicht in de data kunnen krijgen.
+
+Om te beginnen open je in R Studio via File -> Open File... het bestand `C:\Users\student\Desktop\labs\3 - Datavisualisatie\R\Lab03_Start.R`.
+Als het bestand geopend is, selecteer je alle tekst in het bestand en klik je op de knop 'Run'. Nu zijn de juiste *libraries* geladen, en zijn enkele functies aangemaakt.
+---
+# 1.0 Data inlezen
+Eerst moeten we de dataset inlezen. We gebruiken de data uit het bestand "Bike Rental UCI dataset Day.csv". Dit is de dezelfde dataset als uit de voorgaande oefeningen, maar ditmaal op dagniveau (i.p.v. uurniveau).
+
+Hint: gebruik de functie read.csv()
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Probeer eerst zelf de dataset in te lezen. Kom je er niet uit? Klik dan hier om de code te tonen.
+]
+.expanded_content[
+```R
+bike.dat <- read.csv('Bike Rental UCI dataset Day.csv');
+```
+]
+.collapsed_content[
+```R
+         <- read.csv(                             );
+```
+]]]
+
+---
+# 1.1 Verkennen van de dataset
+Zoals gezegd werken we met dezelfde dataset als in voorgaande oefeningen, maar dan op dagniveau.
+
+Om een idee te krijgen hoe deze dataset eruit ziet, vragen we het aantal rijen en kolommen van de dataset op.
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Probeer het eerst zelf uit te vinden. Kom je er niet uit? Klik dan hier om de code te tonen.
+]
+.expanded_content[
+```R
+ncol(bike.dat)
+nrow(bike.dat)
+```
+]
+.collapsed_content[
+```R
+
+
+```
+]]]
+
+Bekijk ook de bovenste 6 rijen van de dataset om een beeld te krijgen van de inhoud van de kolommen.
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Probeer het eerst zelf uit te vinden. Kom je er niet uit? Klik dan hier om de code te tonen.
+]
+.expanded_content[
+```R
+head(bike.dat)
+```
+]
+.collapsed_content[
+```R
+     bike.dat
+```
+]]]
+
+Zoals te zien, bevat ook deze dataset genormaliseerde waarden. Omdat we de gegevens gaan gebruiken in visualisaties, gaat de voorkeur uit naar leesbare waarden. Daarom gaan we de dataset verrijken.
+---
+# 1.2 Verrijken van de dataset.
+Verrijk de dataset door een aantal labels toe te voegen.
+```R
+# Voeg een aantal labels toe voor de leesbaarheid
+season <- data.frame(season = c(1,2,3,4), season_label = c("spring","summer","fall","winter"))
+yr <- data.frame(yr = c(0,1), yr_label = c(2011,2012))
+weathersit <- data.frame(weathersit = c(1,2,3,4), weathersit_label = c("Clear","Mist","Light Rain","Heavy Rain"))
+
+bike.dat$season_label <- season$season_label[bike.dat$season]
+bike.dat$yr_label <- yr$yr_label[bike.dat$yr+1]
+bike.dat$temp_label <- bike.dat$temp * 41
+bike.dat$atemp_label <- bike.dat$atemp * 50
+bike.dat$hum_label <-bike.dat$hum * 100
+bike.dat$windspeed_label <- bike.dat$windspeed * 67
+bike.dat$weathersit_label <- weathersit$weathersit_label[bike.dat$weathersit]
+```
+Bekijk nogmaals de eerste regels uit de dataset.
+```R
+head(bike.dat)
+```
+---
+
+# 2.0 Zoeken naar correlaties (1/2)
+We hebben het vermoeden dat er een correlatie is tussen het totaal aantal verhuurde fietsen (kolom *cnt*) en het weer (weather situation; *weathersit*)
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maak hiervoor gebruik van de functie `cor`.
+]
+.expanded_content[
+```R
+cor(bike.dat$cnt, bike.dat$weathersit)```
+]
+.collapsed_content[
+```R
+cor(            ,                    )
+```
+]]]
+
+De uitkomst is een *correlatiecoëfficiënt* tussen de 0 (geen verband) en 1 (positieve correlatie) of 0 en -1 (negatieve correlatie)
+
+Kijk naar de correlatie. 
+
+- Is de correlatie positief of negatief?
+- Wat betekent dit voor het weer: zorgt een hoger "weercijfer" voor meer of minder fietsverhuur?
+- Is dit verband logisch te verklaren?
+
+(hint: wordt "goed" weer door een hoge, of een lage score weergegeven?)
+
+---
+# 2.1 Zoeken naar correlaties (2/2)
+Bereken nu de correlatiecoëfficiënt tussen het aantal verhuurde fietsen (kolom *cnt*) en de temperatuur (kolom *temp_label*).
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+]
+.expanded_content[
+```R
+cor(bike.dat$cnt, bike.dat$temp_label)```
+]
+.collapsed_content[
+```R
+cor(            ,                    )
+```
+]]]
+
+Bekijk de uitkomst:
+- Is de correlatie nu positief of negatief?
+- Wat betekent dit: Als de temperatuur stijgt, worden er dan meer of minder fietsen verhuurd?
+- Is de correlatie sterker of minder sterk dan bij het 'weercijfer'?
+- Kun je aan de hand van de betekenis van het 'weercijfer' weersomstandigheden kunnen bedenken waarom de temperatuur van meer invloed is dan het 'weercijfer'?
+---
+# 3.0 Distributie
+Wanneer we voorspellingen willen doen over onze fietsverhuur, is het van belang dat er onder diverse omstandigheden voldoende metingen hebben. 
+Om hier meer inzicht in te krijgen kijken we naar de distributie van de gegevens.
+
+Bekijk de distributie van het aantal fietsers (cnt) met behulp van de functie `hist`.
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+]
+.expanded_content[
+```R
+hist(x=bike.dat$cnt)```
+]
+.collapsed_content[
+```R
+hist(x=            )
+```
+]]]
+
+Zijn de gegevens voldoende gespreid?
+Herhaal deze stap ook voor weathersit en temp_label.
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+]
+.expanded_content[
+```R
+hist(x=bike.dat$weathersit)
+hist(x=bike.dat$temp_label)
+```
+]
+.collapsed_content[
+```R
+hist(x=                         )
+```
+]]]
+
+---
+# 3.1 Distributie schaal
+Hist is een eenvoudige manier om de distributie in kaart te brengen.
+Standaard wordt de distributie uiteengezet een x aantal kolommen (ook wel 'bins'). Dit kan een vertekend beeld geven. 
+Kijk eens naar het volgende voorbeeld:
+
+```R
+par(mfrow=c(1,2))
+hist(x=bike.dat$cnt, breaks=5) 
+hist(x=bike.dat$cnt, breaks=100)
+par(mfrow=c(1,1))
+```
+Hoe vaak komt de waarde '2000' voor volgens de eerste grafiek?
+En hoe vaak komt de waarde '2000' voor volgens de tweede grafiek?
+
+Het resultaat van hist is sterk afhankelijk van het aantal gekozen bins.
+
+---
+# 3.2 Distributie density
+Een alternatief voor hist (wat een waarde uitzet tegen het aantal voorkomens) is een density plot. Hierin wordt ook de distributie weergegeven, maar nu uitgezet tegen het relatieve aantal voorkomens (density 0.1 betekent dat de waarde in 10% van de totale set voorkomt).
+
+```R
+d <- density(bike.dat$cnt) 
+plot(d)
+```
+
+Bekijk het resultaat. De density plot geeft een meer vloeiende weergave van de spreiding.
+---
+# 4.0 Correlaties onderzoeken
+Om meer inzicht te krijgen in de correlaties binnen de data gaan we dit grafisch uiteenzetten.
+Hier zijn verschillende mogelijkheden voor. Om het overzicht te bewaren stoppen we een subset van de variabelen in een dataframe, zodat we deze eenvoudig kunnen hergebruiken.
+
+Zet de variabelen cnt, weathersit_label en temp_label in een nieuw dataframe met de naam 'bikers'.
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+]
+.expanded_content[
+```R
+bikers <- (with(bike.dat, data.frame(cnt, weathersit_label,temp_label))) ```
+]
+.collapsed_content[
+```R
+bikers <- (with(        , data.frame(   ,                ,       ))) 
+```
+]]]
+
+Met de functie 'pairs' kunnen we de variabelen uiteenzetten in een matrix.
+```R
+pairs(bikers)
+```
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wat valt op?
+]
+.expanded_content[
+- Tussen cnt en temp_label lijkt een bepaalde relatie te bestaan.
+- Weathersit_label geeft wat minder zinvolle informatie, omdat dit categorische informatie is.
+]
+.collapsed_content[
+]]]
+---
+# 4.1 Correlaties onderzoeken met ggpairs
+
+Een alternatieve weergave kan gerealiseerd worden met ggpairs uit de package `GGally`.
+Deze functie geeft een andere grafische weergave en toont direct de correlatie per variabele.
+
+```R
+ggpairs(bikers)
+```
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wat valt op?
+]
+.expanded_content[
+De volgende zaken zijn o.a. zichtbaar:
+- Weathersit_label wordt nu niet als scatterplot, maar als histogram en boxplot weergegeven. 
+  Dit geeft meer inzicht in de invloed van weathersit_label op cnt en temp_label.
+- De meeste fietsen worden verhuurd bij weathersit_label 'clear'.
+- Er lijkt een correlatie tussen cnt en temp_label te zitten.
+- Fietsers houden niet van regen.
+- Etc.
+]
+.collapsed_content[
+]]]
+
+---
+# 4.2 Correlaties plotten
+We hebben eerder laten zien dat er een correlatie is tussen het aantal verhuurde fietsen en de temperatuur.
+Om meer inzicht te krijgen hoe dit verband eruit ziet, willen we dit grafisch weergeven.
+
+We starten met een eenvoudige plot.
+```R
+plot(bike.dat$temp_label, bike.dat$cnt)
+```
+Plot geeft een aantal mogelijkheden om gegevens grafisch weer te geven.
+---
+# 4.3 Correlaties plotten met ggplot
+De package `ggplot2` heeft een meer geavanceerde implementatie: `ggplot`. Deze heeft meer grafische mogelijkheden dan `plot`.
+
+Met `ggplot` bouwen we plots op in 'layers'. Om te beginnen maken we een plotdefinitie voor `temp_label` en `cnt`.
+
+```R
+bike.plot1 <- ggplot(data=bike.dat, aes(x=temp_label,y=cnt))
+```
+Aan de plotdefinitie kan vervolgens een 'layer' worden toegevoegd. Hiermee wordt bepaald hoe de gegevens worden weergegeven. Voer de volgende voorbeelden één voor één uit, en kijk wat het effect van `geom_point()` en `geom_line()` is.
+
+```R
+bike.plot1 + geom_point()
+bike.plot1 + geom_line()
+```
+---
+# 4.4 Plot uitbreiden
+De plot met `geom_point` geeft een goed beeld van de correlatie tussen de temperatuur en het aantal verhuurde fietsen. We gaan deze plot gebruiken en verder uitbreiden.
+
+GGplot kan eenvoudig uitgebreid worden door extra instellingen aan de plot toe te voegen via '+'.
+
+```R
+bike.plot1 <- ggplot(data=bike.dat, aes(x=temp_label,y=cnt,color=factor(workingday))) + 
+scale_colour_discrete(name = "Werkdag") +
+scale_x_continuous("Temperatuur") +
+scale_y_continuous("Aantal verhuurde fietsen") +
+ggtitle("Aantal verhuurde fietsen per temperatuur")
+
+bike.plot1 + geom_point()
+```
+
+Bekijk de aangepaste plot.
+
+
+---
+# 4.5 Plot nog verder uitbreiden
+Door de clustering van de punten is het verband soms lastig vast te stellen. We kunnen dit inzichtelijker maken door een regressielijn toe te voegen.
+Dit doen we door gebruik te maken van de functie `geom_smooth`.
+
+```R
+bike.plot1 + geom_point() + geom_smooth()
+```
+Indien wenselijk kan er ook gekozen worden voor een lineaire regressielijn.
+
+```R
+bike.plot1 + geom_point() + geom_smooth(method="lm")
+```
+
+Door facet_wrap(~parameter) toe te voegen, kunnen we de plot uitzetten tegen een andere variabele.
+Zet de plot eens uit tegen workingday om te zien wat de impact van een werk- of weekenddag is.
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+]
+.expanded_content[
+```R
+bike.plot1 + geom_point() + geom_smooth(method="lm") +  facet_wrap(~workingday)```
+]
+.collapsed_content[
+```R
+bike.plot1 +              +                          +  facet_wrap(~          )```
+]]]
+
+---
+# 5.0 Onderzoek distributie
+In de voorgaande scatterplots was te zien dat er een behoorlijke variatie in het aantal verhuurde fietsen per temperatuur is.
+Dat roept de vraag op hoezeer die gegevens per temperatuur verspreid zijn.
+Om het overzicht wat eenvoudiger te maken, ronden we de temperatuur allereerst af op hele getallen.
+
+```R
+bike.dat$temp_label_round = round(bike.dat$temp_label, 0)
+head(bike.dat)
+```
+
+Maak nu een boxplot gebaseerd op temp_label_round en het aantal verhuurde fietsen, zodat grafisch zichtbaar wordt hoe de spreiding van gegevens is voor de verschillende temperaturen.
+```R
+ggplot(bike.dat, aes(temp_label_round,cnt,fill=interaction(temp_label_round))) +
+	geom_boxplot() +
+	stat_boxplot(geom="errorbar")
+```
+Hoewel het er kleurrijk uitziet, geeft een dergelijke regenboog niet veel informatie omdat er teveel categorieen zijn.
+Daarom nogmaals dezelfde chart, maar nu met sobere weergave.
+
+---
+# 5.1 Verbeterde boxplot
+We passen de boxplot aan zodat er een sobere weergave ontstaat.
+
+```R
+ggplot(bike.dat, aes(factor(temp_label_round),cnt)) +
+  geom_boxplot() +
+  stat_boxplot(geom="errorbar") +
+  scale_x_discrete("Temperatuur") +
+  scale_y_continuous("Aantal verhuurde fietsen") +
+  ggtitle("Aantal verhuurde fietsen per temperatuur")
+```
+
+Een boxplot bevat veel informatie, maar kan lastig te lezen zijn. Op de volgende slide is een kort overzicht van een boxplot opgenomen.
+
+---
+# 5.2 Overview boxplot
+```
+                            +-----+-+
+  x           o     |-------|     | |---|
+                            +-----+-+
+                                         
++---+---+---+---+---+---+---+---+---+---+---+--   Getallenreeks
+0   1   2   3   4   5   6   7   8   9  10   11
+```
+
+```
+Kleinste waarneming (minimum of min) = 0,5
+Eerste kwartiel (Q1) = 7
+Tweede kwartiel (Q2) of mediaan (Med) = 8,5
+Derde kwartiel (Q3) = 9
+Grootste waarneming (maximum of max) = 10
+interkwartielafstand, IKA = Q3-Q1 = 2
+De waarde 3,5 is een "zwakke" uitschieter omdat hij tussen 1,5xIKA and 3xIKA onder Q1 ligt
+De waarde 0,5 is een "extreme" uitschieter omdat hij meer dan 3xIKA onder Q1 ligt
+De kleinste waarde die geen uitschieter is, is 5
+De data zijn scheef naar links (negatief scheef) verdeeld
+```
+
+Bekijk met deze achtergrondinformatie nogmaals de boxplot. Wat valt je op?
+---
+# 5.3 Mediaan plotten
+De horizontale lijn in de boxplot geeft de mediaan (mean) weer.
+Tot ongeveer 23 graden lijkt er een opwaartse trend te zijn, daarna fluctueert het resultaat.
+Om het effect van de mediaan beter zichtbaar te maken, geven we deze weer in een nieuwe plot. 
+
+We beginnen met het bepalen van de mediaan.
+```R
+agg <- aggregate(cnt ~ temp_label_round, data = bike.dat, mean)
+head(agg)
+```
+
+Maak nu een plot gebaseerd op cnt en temp_label_round.
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+]
+.expanded_content[
+```R
+bike.plot2 <- ggplot(agg, aes(x=temp_label_round,y=cnt))
+bike.plot2 + geom_point()
+
+# Voeg een lijn toe om het verloop extra te benadrukken.
+bike.plot2 + geom_point(color="red", size=3) + geom_line()
+```
+]
+.collapsed_content[
+```R
+
+```
+]]]
+
+---
+# 6.0 Regressiemodel bouwen
+Om de kennis over de data die we opgedaan hebben beter toepasbaar te maken, is het handig een model te bouwen.
+In dit geval vermoeden we dat we met een lineair verband te maken hebben. De vorm van het model kunnen we in dat geval ontdekken met een lineaire regressie.
+
+De variabele die we willen voorspellen is "cnt", het totaal aantal verhuurde fietsen.
+We willen dit voorspellen op basis van de temperatuur. De inputvariabele is dus  "temp_label".
+Als data nemen we de gehele set die we eerder ingeladen hebben.
+
+Eerst maken we een model, gebaseerd op cnt en temp_label.
+```R
+bike.model_1 <- lm(cnt ~ temp_label, data = bike.dat);
+summary(bike.model_1)
+cor(bike.dat$cnt, bike.dat$temp_label)
+```
+---
+# 6.1 Resultaten regressiemodel (1/2)
+Vervolgens proberen we om aan de hand van ons model de cnt te voorspellen.
+```R
+predicted_cnt <- predict(bike.model_1, data = bike.dat);
+cor(predicted_cnt, bike.dat$cnt);
+```
+Om te kijken hoe ons model presteert, willen we het plotten. Om het plotten eenvoudiger te maken, slaan we de resultaten op in het dataframe.
+```R
+bike.dat$predicted_cnt_1 <- predicted_cnt;
+```
+
+---
+# 6.1 Resultaten regressiemodel (2/2)
+Nu we de voorspelde waarden opgeslagen hebben, kunnen we de werkelijke en voorspelden waarden tegen elkaar uitzetten. Hoe sterker de zichtbare correlatie daar is, hoe beter ons model presteert.
+
+```R
+bike.plot3 <- ggplot(data=bike.dat, aes(x=cnt,y=predicted_cnt_1)) +
+  geom_point() +
+  scale_x_continuous("Werkelijk aantal verhuurde fietsen") +
+  scale_y_continuous("Voorspeld aantal verhuurde fietsen") +
+  ggtitle("Werkelijk en voorspeld aantal verhuurde fietsen")
+bike.plot3 
+```
+Voeg een regressielijn toe voor de duidelijkheid.
+```R
+bike.plot3 <- bike.plot3 + geom_smooth(method = 'lm', aes(fill = 'confidence'), alpha = 0.5)
+bike.plot3
+```
+---
+# 6.2 Diagnose regressiemodel (1/2)
+De correlatiecoefficient tussen het aantal verhuurde fietsen en temp_label is 0.63.
+```R
+cor(bike.dat$cnt, bike.dat$temp_label)
+```
+Een punt dat erg ver van een verder bijna perfecte lijn afligt geeft een forse daling in de correlatiecoëfficiënt. Dat komt natuurlijk omdat die afwijking in het kwadraat wordt genomen, en dus relatief erg zwaar meetelt. 
+
+Een manier om uitschieters te onderzoeken is door gebruik te maken van Cook's afstand. Onderstaande code laat Cook's afstand zien voor de punten in onze dataset, weergegeven in een grafiek.
+
+```R
+df <- fortify(bike.model_1)
+df <- cbind(df, rows=1:nrow(df))
+ggplot(df, aes(rows, .cooksd, ymin=0, ymax=.cooksd)) + geom_point() +
+  geom_text(data=df[df$.cooksd > 0.01,], aes(label=rows, vjust=-1)) +
+  scale_x_continuous("Observatie nummer") +
+  scale_y_continuous("Cook's afstand",limits=c(0,0.02)) +
+  ggtitle("Cook's afstand")
+```
+De punten met een relatief grote Cook's afstand zijn genummerd.
+---
+# 6.3 Diagnose regressiemodel (2/2)
+Een aantal punten hebben een grote afwijking van het verwachtte resultaat (Cook's distance): 203, 204, 205, 210 en 239.
+Dit kan een signaal zijn dat van deze punten de sample te laag is, of dat ze een uitschieter (outlier) zijn.
+
+Laten we eens inzoomen op 204.
+
+```R
+bike.dat[204,c("dteday","temp_label", "cnt","predicted_cnt_1")]
+```
+Bij een temperatuur van 34.8 graden waren 3285 verhuurde fietsen geregistreerd. Het voorspelde aantal was echter 6853.
+Het model stuurt nu alleen op temperatuur, dus laten we eens kijken hoe de andere gegevens rond de 34 graden eruit zien.
+```R
+ggplot(bike.dat[bike.dat$temp_label_round %in% c("34", "35"),], aes(x=dteday, y=cnt, fill=dteday)) + 
+  geom_bar(stat="identity") + 
+  geom_hline(aes(yintercept=6848)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+De spreiding binnen 34/35 graden is inderdaad vrij hoog. Alleen de temperatuur als input voor het model is dus niet voldoende.
+---
+# 6.4 Een beter model
+We doen hetzelfde nog een keer, maar ditmaal gebruik we veel meer variabelen voor ons model.
+```R
+bike.model_2 <- lm(cnt ~ season + yr + mnth + holiday + weekday + workingday + 
+					weathersit + temp + atemp + hum + windspeed, data = bike.dat);
+predicted_cnt <- predict(bike.model_2, data = bike.dat);
+mae( predicted_cnt, bike.dat$cnt );
+bike.dat$predicted_cnt_2 <- predicted_cnt;
+```
+En vervolgens plotten we de resultaten.
+```R
+bike.plot4 <- ggplot(data=bike.dat, aes(x=cnt ,y=predicted_cnt_2)) +
+  geom_point() +
+  scale_x_continuous("Werkelijk aantal verhuurde fietsen") +
+  scale_y_continuous("Voorspeld aantal verhuurde fietsen") +
+  ggtitle("Werkelijk en voorspeld aantal verhuurde fietsen")
+bike.plot4 <- bike.plot4 + geom_smooth(method = 'lm', aes(fill = 'confidence'), alpha = 0.5)
+bike.plot4
+```
+---
+# 6.5 Diagnose regressiemodel
+Wederom gaan we de data in het model grafisch weergeven om te controleren.
+```R
+df <- fortify(bike.model_2)
+df <- cbind(df, rows=1:nrow(df))
+ggplot(df, aes(rows, .cooksd, ymin=0, ymax=.cooksd)) + geom_point() +
+  geom_text(data=df[df$.cooksd > 0.01,], aes(label=rows, vjust=-1)) +
+  scale_x_continuous("Observatie nummer") +
+  scale_y_continuous("Cook's afstand") +
+  ggtitle("Cook's afstand")
+```
+Wat opvalt, is dat er (naast de eerder geconstateerde punten) nog meer punten bijgekomen zijn. Is dit logisch?
+
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+]
+.expanded_content[
+Ja. Omdat we nu (veel) meer variabelen in ons model hebben gebruikt, is er een kans dat bepaalde afwijkingen worden opgelost (omdat we meer informatie hebben om de 'juiste' waarde te bepalen).
+Omgekeerd kunnen er ook juist meer afwijkingen worden geintroduceerd. Het toevoegen van extra variabelen betekent niet automatisch dat er geen of minder uitschieters zijn. 
+]
+.collapsed_content[
+```
+```
+]]]
+
+Daarnaast hebben we een nieuwe uitschieter: 595
+---
+# 6.6 Controle uitschieter
+Controleer de data in 595.
+```R
+bike.dat[595,]
+```
+Ons model bestaat nu uit veel meer variabelen, maar we zoomen voor het gemak even in op de temperatuur.
+```R
+bike.dat[bike.dat$temp_label_round=="30",]
+```
+Wat opvalt, is dat 595 een erg afwijkende gevoelstemperatuur (atemp) heeft. Het klopt dus dat deze observatie als 'outlier' wordt aangemerkt.
+```R
+ggplot(bike.dat[bike.dat$temp_label_round=="30",], aes(x=temp_label, y=atemp_label, size=atemp_label*-1)) + 
+  geom_point() + 
+  geom_hline(aes(yintercept=30)) +
+  scale_x_continuous("Temperatuur") +
+  scale_y_continuous("Gevoelstemperatuur") +
+  ggtitle("Temperatuur uitgezet tegen gevoelstemperatuur bij 30 graden")
+```
+---
+# 7.0 Resultaat
+Tenslotte zetten we de resultaten van beide regressiemodellen naast elkaar.
+```R
+grid.arrange(bike.plot3, bike.plot4, ncol=2)
+```
+Wat valt je op?
+.box[
+.container.collapsed[
+.nav.closed[
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+]
+.expanded_content[
+Plot 4 is nauwkeuriger omdat de punten minder verspreid zijn, er is een sterker lineair verband. 
+De punten liggen ook dichter bij de regressielijn.
+De confidence interval van plot 4 is smaller, 
+wat betekent dat de regressielijn van plot 4 nauwkeuriger is dan de regressielijn van plot 3.
+De regressielijn van plot 4 is 'steiler' dan die van plot 3, wat duidt op een sterker lineair verband.
+]
+.collapsed_content[
+]]]
+</textarea>
+	
+	
+	
+    <!--<script src="http://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">
+    </script>-->
+	<script src="../etc/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      //var slideshow = remark.create();
+		var slideshow = remark.create({
+		  // Set the slideshow display ratio
+		  // Default: '4:3'
+		  // Alternatives: '16:9', ...
+		  ratio: '16:9',
+
+		  // Navigation options
+		  navigation: {
+			// Enable or disable navigating using scroll
+			// Default: true
+			// Alternatives: false
+			scroll: true,
+
+			// Enable or disable navigation using touch
+			// Default: true
+			// Alternatives: false
+			touch: true,
+
+			// Enable or disable navigation using click
+			// Default: false
+			// Alternatives: true
+			click: false
+		  }
+});
+    </script>
+	
+	<script type="text/javascript">
+    $(".box").delegate(".nav.closed", "click", function(e) {
+        //if ($(e.target).hasClass("container")) {
+            $(this).parent().addClass("expanded");
+        //}
+    });
+  
+    $(".box").delegate(".container.expanded .nav", "click", function(e) {
+        $(this).parent().removeClass("expanded");
+        e.stopPropagation();
+    });
+	</script>
+	
+  </body>
+</html>
